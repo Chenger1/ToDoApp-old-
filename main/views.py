@@ -82,10 +82,6 @@ def time_proccessing(times, time_trigger):
 			return times
 
 class ActionsAddView(View):
-	def get(self, request):
-		form = ActionForm(request.user)
-		return render(request, 'main/add_action.html', context={'forms':form})
-	
 	def post(self, request):
 		form = ActionForm(request.user,request.POST, request.FILES)
 		if form.is_valid():
@@ -115,10 +111,6 @@ class ActionsAddView(View):
 		return render(request, 'main/add_action.html', context={'forms':form})
 
 class UpdateView(View):
-	def get(self, request, slug):
-		obj = Action.objects.get(slug__iexact=slug)
-		form = ActionForm(request.user, instance=obj)
-		return render(request, 'main/includes/change_form.html', context={'change_forms':form,Action.__name__.lower():obj })
 	def post(self, request, slug):
 		obj = Action.objects.get(slug__iexact=slug)
 		form = ActionForm(request.user, request.POST,request.FILES,instance=obj)
