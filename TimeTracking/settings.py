@@ -23,9 +23,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 't00c_8a+u764#vvn5e4m%vplff#()vad*_!jg(c4x54d&#4bb'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'time-tracker-nitron.herokuapp.com',
+]
 
 
 # Application definition
