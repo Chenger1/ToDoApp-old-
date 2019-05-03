@@ -1,0 +1,69 @@
+{%extends 'main/base.html'%}
+
+{%load crispy_forms_tags%}
+
+{%block content%}
+<div class="container register-container">
+	<div class="row">
+		<div class="col aside_register">
+			<h2>Save your actions, like this:</h2>
+				<hr>
+				<div class="card text-center" style="width: 25rem;">
+						<div>
+							<img src="/static/static_image/mac.jpg" class="card-img-top" alt="Action image" style="width: 100%; height: 250px;">
+						</div>
+						<div class="card-body">
+							<h5 class="card-header">Work</h5>
+							<hr>
+							<p class="card-text lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+							tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+							<hr>
+							<h5>Time: 3 hour(s) 25 minute(s)
+							</h5>
+						</div>
+						<div class="card-footer text-muted">
+							1 January 2019
+						</div>
+					</div>
+		</div>
+		<div class="col-4 register">
+			<h2 class="text-center">Registration Form</h2>
+			<form action="{%url 'register_url'%}" method="post">
+				{%csrf_token%}
+				{{forms|crispy}}
+			<input type="submit" class="btn btn-success" value="Registration">
+			</form>
+			<hr>
+			<div>
+				<h3>Links:</h3>
+				<div class="row">
+					<div class="col">
+						<h4>GitHub:</h4>
+						<h5><a href="#">Chenger1</a></h5>
+					</div>
+					<div class="col">
+						<h4>ChromeExtend</h4>
+						<a href="#">Link</a>
+					</div>
+					<div class="col">
+						<h4>TelegramBot</h4>
+						<a href="#">Link</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col aside_register category-container">
+			<h2>Add new category</h2>
+			<ul>
+				<li><a href="#">Work</a><span> <- click her and you will see all action in it.</span></li>
+				<li><a href="#">Relax</a></li>
+				<li><a href="#">Sport</a></li>
+				<li><a href="#">Family</a></li>
+				<li><a href="#">Study</a></li>
+				<li><a href="#">Travel</a></li>
+				<li><a href="#">Another</a></li>
+			</ul>
+			<button class="btn btn-primary">Add category</button>
+		</div>
+</div>
+{%endblock%}

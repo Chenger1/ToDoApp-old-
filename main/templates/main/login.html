@@ -1,0 +1,13 @@
+{%extends 'main/base.html'%}
+{%load crispy_forms_tags%}
+
+{%block content%}
+	<div class="container login-container">
+		<h2 class="text-center">Welcome to TimeTracker again</h2>
+		<form action="{%url 'login_url'%}" method="post">
+			{%csrf_token%}
+			{{forms|crispy}}
+			<input type="submit" class="btn btn-success" value="Sign in">
+		</form>
+	</div>
+{%endblock%}

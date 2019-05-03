@@ -1,0 +1,65 @@
+{%load staticfiles%}
+{%load crispy_forms_tags%}
+<head>
+	<link rel="stylesheet" href="{%static 'css/checkbox.css'%}">
+</head>
+
+<div class="modal fade bd-example-modal-lg" id="addAction" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h2 class="text-center">Create action</h2>
+			</div>
+			<div class="modal-body">
+					<div class="container">
+						<div class="row">
+							<div class="col">
+								<form action="{%url 'add_action_url'%}", method="post", id="submit_form">
+									{%csrf_token%}
+										<div class="form-row">
+											<div class="col">
+												{{forms.name|as_crispy_field}}
+											</div>
+											<div class="col">
+												<div class="center">
+														{{forms.time_trigger|as_crispy_field}}
+												</div>
+											</div>
+										</div>
+										<div class="form-row currently">
+											<div class="col">
+												{{forms.time_to_do_hour|as_crispy_field}}
+											</div>
+											<div class="col">
+												{{forms.time_to_do_minute|as_crispy_field}}
+											</div>
+										</div>
+										<div class="form-row">
+											<div class="col">
+												{{forms.time_should_be_hour|as_crispy_field}}
+											</div>
+											<div class="col">
+												{{forms.time_should_be_minute|as_crispy_field}}
+										</div>
+										</div>
+										<div class="form-row">
+											<div class="col">
+												{{forms.description|as_crispy_field}}
+											</div>
+											<div class="col">
+												{{forms.categorys|as_crispy_field}}
+											</div>
+										</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-success">Create</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script src="{%static 'js/add_action.js'%}"></script>

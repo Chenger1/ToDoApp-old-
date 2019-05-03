@@ -1,0 +1,105 @@
+<div class="modal fade bd-example-modal-lg changeAction" id="changeAction-{{action.id}}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h2 class="text-center">Change action</h2>
+			</div>
+			<div class="modal-body">
+					<div class="container">
+						<div class="row">
+							<div class="col">
+        <form action="{{action.get_update_url}}" method="post">
+        	{%csrf_token%}
+        	<div class="form-row">
+						<div class="col">
+							<div class="form-group">
+								<label for="name_input" class="col-form-input" requiredField>
+								Name
+								<span class="asteriskField">*</span>
+							</label>
+							<input type="text" name="name" value="{{action.name}}" id="name-input" class="form-control textinput textInput" maxlength="150">
+							</div>
+						</div>
+						<div class="col">
+							<div class="center">
+									<div class="form-group">
+									{%if action.time_trigger%}
+										<input type="checkbox" name="time_trigger" value="False" 
+										 style="display: none;" class="checkboxinput form-check-input form-control" id="id_time_trigger">
+									
+									{%else%}
+									<label for="id_time_trigger">Sheduled this action</label>
+									<input type="checkbox" name="time_trigger" 
+										 class="checkboxinput form-check-input form-control" id="id_time_trigger">
+									{%endif%}
+									</div>
+							</div>
+						</div>
+					</div>
+					<div class="form-row currently">
+						<div class="col">
+							<div class="form-group">
+								<label for="id_time_to_do_hour" class="col-form-input">Time to do hour</label>
+								<input type="number" name="time_to_do_hour" value="{{action.time_to_do_hour}}" class="time_check currently numberinput form-control" id="id_time_to_do_hour">
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-group">
+								<label for="id_time_to_do_minute" class="col-form-input">Time to do minute</label>
+								<input type="number" name="time_to_do_minute" value="{{action.time_to_do_minute}}" class="time_check currently numberinput form-control" id="id_time_to_do_minute">
+							</div>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="col">
+							<div class="form-group">
+								<label for="id_time_should_be_hour" class="col-form-input">Time should be hour</label>
+								<input type="number" name="time_should_be_hour" value="{{action.time_should_be_hour}}" class="time_check numberinput form-control" id="id_time_should_be_hour">
+							</div>
+						</div>
+						<div class="col">
+							<div class="form-group">
+								<label for="id_time_should_be_minute" class="col-form-input"> Time should be minute</label>
+								<input type="number" name="time_should_be_minute" value="{{action.time_should_be_minute}}" class="time_check numberinput form-control" id="id_time_should_be_minute">
+							</div>
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="col">
+							<div class="form-group">
+								<label for="id_description" class="col-form-input">Description</label>
+								<textarea name="description" cols="40" rows="10" style="height: 150px;" value="{{action.description}}" class="textarea form-control" id="id_description"></textarea>
+							</div>
+						</div>
+						<div class="col">
+							<!--<select name="categorys" class="form-control" id="id_categorys" readonly>
+							{%for item in categorys%}
+								<option value="{{item.id}}">{{item.name}}</option>
+							{%endfor%}
+							</select>-->
+							<div class="form-group">
+								<label for="id_category" class="col-form-input">Category</label>
+								
+								<select name="categorys" id="id-categorys" readonly class="form-control" id="id_category">
+									{%for item in action.category.all%}
+									<option value="{{item.id}}">{{item}}</option>
+									{%endfor%}
+								</select>
+								
+							</div>
+						</div>
+					</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="submit" class="btn btn-success">Change</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<span style="display: none;" id="category-{{action.id}}">{%for item in action.category.all%}{{item}}{%endfor%}</span>

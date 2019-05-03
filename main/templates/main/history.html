@@ -1,0 +1,113 @@
+{%extends 'main/base.html'%}
+{%load staticfiles%}
+{%block content%}
+{%	if request.user.is_authenticated %}
+<div class="container history_container">
+	{%if actions%}
+	<div class="row ">
+		<div class="col">
+			<h2>Scheduled Activities</h2>
+			{%for action in actions%}
+			{%if action.time_trigger%}
+			<div>
+				<div class="card text-center" style="width: 25rem;">
+					<div class="card-body">
+						<h5 class="card-header {%if action.time_trigger%} scheduled_action {%endif%}">{{action.name}}</h5>
+						<hr>
+						<p class="cart-text lead">{{action.description}}</p>
+						<hr>
+						<h5><strong>Time must be spent</strong>:<br>	{{action.time_should_be_hour}} hour(s) 
+							{%if action.time_should_be_minute != 0%}
+							{{action.time_should_be_minute}} minute(s)
+							{%endif%}
+						</h5>
+					</div>
+					<div class="card-footer text-muted">
+						<div class="row">
+							<div class="col-6">
+								{{action.data}}
+							</div>
+							<div class="col">
+								<a href="{{action.get_restore_url}}">Restore</a>
+							</div>
+							<div class="col">
+								<a href="{{action.get_delete_url}}">Delete</a>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			{%endif%}
+			{%endfor%}
+		</div>
+		<div class="col">
+			<h2>Done activities</h2>
+			{%for action in actions%}
+			{%if action.time_trigger == False%}
+			<div>
+				<div class="card text-center" style="width: 25rem;">
+					<div class="card-body">
+						<h5 class="card-header {%if action.time_trigger%} scheduled_action {%endif%}">{{action.name}}</h5>
+						<hr>
+						<p class="cart-text lead">{{action.description}}</p>
+						<hr>
+						<h5><strong>Time usage</strong>:<br>	{{action.time_to_do_hour}} hour(s) 
+							{%if action.time_to_do_minute != 0%}
+							{{action.time_to_do_minute}} minute(s)
+							{%endif%}
+						</h5>
+					</div>
+					<div class="card-footer text-muted">
+						<div class="row">
+						<div class="col-6">
+							{{action.data}}
+						</div>
+						<div class="col">
+							<a href="{{action.get_restore_url}}">Restore</a>
+						</div>
+						<div class="col">
+							<a href="{{action.get_delete_url}}">Delete</a>
+						</div>
+					</div>
+					</div>
+				</div>
+			</div>
+			{%endif%}
+			{%endfor%}
+		</div>
+	{%else%}
+		<h5>You dont have some actions</h5>
+	{%endif%}
+
+	</div>	
+</div>
+{%else%}
+<div class="container">
+	<p class="text-center alert alert-primary">
+		You should to <a href="{%url 'register_url'%}" style="color: black; font-weight:800;">Register</a> or <a href="{%url 'login_url'%}" style="color: black; font-weight:800;">Login</a> 
+	</p>
+</div>
+{%endif%}
+{%endblock%}
+			<div class="card" style="width: 25rem;">
+							{%if action.image%}
+						<div>
+							<img src="{{action.image.url}}" class="card-img-top" alt="Action image">
+						</div>
+						{%endif%}
+						<div class="card-body">
+							<h5 class="card-header">{{action.name}}</h5>
+							<hr>
+							<p class="card-text lead">{{action.description}}</p>
+							<hr>
+							<h5>Time: {{action.time_to_do_hour}} hour(s) 
+							{%if action.time_to_do_minute != 0%}
+								{{action.time_to_do_minute}} minute(s)
+							{%endif%}
+							</h5>
+						</div>
+						<div class="card-footer text-muted">
+							{{action.data}}
+						</div>
+					</div>

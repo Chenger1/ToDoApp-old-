@@ -1,0 +1,40 @@
+{%extends 'main/base.html'%}
+{%load crispy_forms_tags%}
+{%block content%}
+	<div class="container">
+		<div class="row">
+			<div class="col"></div>
+			<div class="col-8">
+				<h2 class="text-center">Schedule an action</h2>
+				<form action="{%url 'schedule_url'%}", method="post">
+					{%csrf_token%}
+					<div class="form-row">
+						<div class="col">
+							{{forms.name|as_crispy_field}}
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="col">
+							{{forms.time_should_be|as_crispy_field}}
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="col">
+							{{forms.description|as_crispy_field}}
+						</div>
+					</div>
+					<div class="form-row">
+						<div class="col">
+							{{forms.categorys|as_crispy_field}}
+						</div>
+						<div class="col">
+							{{forms.image|as_crispy_field}}
+						</div>
+					</div>
+					<input type="submit" class="btn btn-primary" value="Create">
+				</form>
+			</div>
+			<div class="col"></div>
+		</div>
+	</div>
+{%endblock%}

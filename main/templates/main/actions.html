@@ -1,0 +1,112 @@
+{%extends 'main/base.html'%}
+
+{%block content%}
+{%	if request.user.is_authenticated %}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8 col-xl-10">
+				<div class="row">
+					<div class="col-10">
+						<h1>Your actions:</h1>	
+					</div>
+					<div class="col-2">
+						<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addAction">
+  						Add Action
+						</button>
+						{%include 'main/includes/add_action.html' with forms=action_form%}
+					</div>
+				</div>
+					{%if actions%}
+							<table class="table">
+								<tr>
+									<td>Name</td>
+									<td>Time Usage</td>
+									<td>Should be</td>
+									<td class="text-center">Data</td>
+									<td>Category</td>
+									<td>Change</td>
+									<td>Delete</td>
+									<td>
+										Expand
+									</td>
+								</tr>
+							{%for action in actions%}
+									<tr class="{%if action.time_trigger%} scheduled_action {%endif%}">
+										<td>{{action.name}}</td>
+										<td>
+											{%if action.time_trigger%}
+												Scheduled
+											{%else%}
+												{{action.time_to_do_hour}}:
+												{%if action.time_to_do_minute != 0%}
+													{{action.time_to_do_minute}}
+												{%else%}
+													0 
+												{%endif%}
+											{%endif%}	
+										</td>
+										<td>
+											{%if action.time_should_be_minute or action.time_should_be_hour%}
+												{{action.time_should_be_hour}}:
+												{%if action.time_should_be_minute != 0%}
+													{{action.time_should_be_minute}} 
+												{%else%}
+													0
+												{%endif%}
+											{%endif%}
+										</td>
+										<td>{{action.data}}</td>
+										<td>
+											{%for item in action.category.all%}
+												{{item}}
+											{%endfor%}
+										</td>
+										<td>
+											<!--<a href="{{action.get_update_url}}">
+												<button type="button" class="btn btn-primary">Change</button>
+											</a>-->
+											<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#changeAction-{{action.id}}">
+	 											Change
+											</button>
+											{%include 'main/includes/сhange_form.html'%}
+										</td>
+										<td><a href="{{action.get_hidden_url}}">Delete</a></td>
+										<td>
+											<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#expandModal-{{action.id}}">
+		 					 					Show more
+											</button>
+											{%include 'main/includes/expand_action.html' with actions=actions %}
+
+										</td>
+									</tr>
+							{%endfor%}
+							</table>
+					{%else%}
+						<h2>You dont have some actions.</h2>
+					{%endif%}
+			</div>
+			<aside class="col-md-4 col-xl-2">
+				<h2>Ваши категории:</h2>
+				<ul>
+					{%for category in categorys%}
+						<li><a href="{{category.get_absolute_url}}">{{category}}</a></li>
+					{%endfor%}
+				</ul>
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addCategory">
+	  						Add Category
+					</button>				
+					{%for form in category_form%}
+					{%include 'main/includes/add_category.html' with forms=category_form%}
+					{%endfor%}
+			</aside> 
+		</div>
+	</div>
+{%else%}
+<div class="container">
+	<p class="text-center alert alert-primary">
+		You should to <a href="{%url 'register_url'%}" style="color: black; font-weight:800;">Register</a> or <a href="{%url 'login_url'%}" style="color: black; font-weight:800;">Login</a> 
+	</p>
+</div>
+{%endif%}
+{%endblock%}
+

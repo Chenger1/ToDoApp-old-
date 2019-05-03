@@ -1,0 +1,71 @@
+{%for action in actions%}
+	<div class="modal fade" id="expandModal-{{action.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content action_modal">
+	      <div class="modal-header" {%if action.time_trigger%}style="background: #cfffc9"{%endif%}>
+	      	<div class="row">
+	      		<div class="col-10">
+	      			<h3 class="modal-title" id="exampleModalLabel">{{action.name}}</h3>
+	      		</div>
+	      		{%if action.time_trigger%}
+				<div class="col-2">
+	      			<h3 class="modal-title" id="exampleModalLabel">Scheduled</h3>
+	      		</div>
+	      		{%endif%}	
+	      	</div>
+	        
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	      	<div class="row">
+	      		{%if action.time_trigger%}
+					<div class="col">
+						<h5 class="time_text">Should be:
+							{{action.time_should_be_hour}}:
+						{%if action.time_should_be_minute != 0%}
+							{{action.time_should_be_minute}} 
+						{%endif%}
+						</h5>
+					</div>
+				{%else%}
+					<div class="col">
+	      				<h5 class="time_text">Time Usage: <br>
+	      					{{action.time_to_do_hour}} hour(s)
+						{%if action.time_to_do_minute != 0%}
+							:{{action.time_to_do_minute}} minute(s) 
+						{%endif%}
+					</h5>
+	      		</div>
+	      		<div class="col">
+	      				{%if action.time_should_be_minute or action.time_should_be_hour%}
+	      				<h5 class="time_text">Should be:<br>
+	      					{{action.time_should_be_hour}} hour(s)
+	      					{%if action.time_should_be_minute != 0%}
+	      						:{{action.time_should_be_minute}} minute(s) 
+	      				{%else%}
+	      					0
+	      					{%endif%}
+	      				{%endif%}
+	      			</h5>
+	      		</div>
+	      		{%endif%}
+	      	</div>
+			<hr>
+	        <p>
+	        	{%if action.description%}
+					{{action.description}}
+				{%else%}
+					>>>Write a description here<<<
+	        	{%endif%}
+	        </p>
+	      </div>
+	      <div class="modal-footer">
+	      	<h5>{{action.data}}</h5>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+{%endfor%}

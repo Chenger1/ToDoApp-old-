@@ -1,0 +1,75 @@
+
+/* register.html */
+.register-container, .first_look-container{
+	max-width: 100%;
+}
+.aside_register{
+	background:#f4f4f4;
+
+}
+
+.img{
+	width: 100%;
+}
+.register{
+	background: #f9fbfc;
+}
+
+.category-container ul li{
+	font-size: 1.5em;
+	font-weight: 600;
+}
+.category-container ul li span{
+	font-weight: 400;
+	text-decoration: underline;
+}
+.category-container ul li a{
+	text-decoration: none;
+	color: #000 !important
+}
+.login-container{
+	width: 300px;
+}
+
+/* first_look.html */
+.first_look-container{
+	margin-top: 230px;
+}
+.first_look-container ul{
+	list-style-type: none;
+}
+.first_look-container ul li a{
+	text-decoration: none;
+	font-size: 2.5em;
+	color: #333333;
+	border: 2px inset #fff;
+}
+.first_look-container ul li a:hover{
+	border: 2px outset #fff;
+	color: #000;
+}
+
+/* history.html*/
+.card{
+	margin-top: 25px;
+	box-shadow: 0 0 10px rgba(0,0,0,0.2);;
+}
+/* action.html */
+.scheduled_action{
+	background: #cfffc9;
+}
+
+.action_modal .modal-header, .modal-footer{
+	background: rgba(0,0,0,.03);
+}
+.action_modal .img_block{
+	border-bottom: 2px solid;
+}
+.action_modal div img{
+	width: 230px;
+	height: 230px;
+}
+
+.action_modal .time_text{
+	margin-top: 15px;
+}
