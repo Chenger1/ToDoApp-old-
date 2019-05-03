@@ -63,7 +63,6 @@ def time_proccessing(times, time_trigger):
 	for index, item in enumerate(times):
 		if item == None:
 			times[index]=0
-	print(times)
 	if time_trigger:
 		if times[1]>=60:
 			while times[1]>=60:
@@ -88,7 +87,6 @@ class ActionsAddView(View):
 		return render(request, 'main/add_action.html', context={'forms':form})
 	
 	def post(self, request):
-		print(request.POST)
 		form = ActionForm(request.user,request.POST, request.FILES)
 		if form.is_valid():
 			time_trigger = form.cleaned_data['time_trigger']
